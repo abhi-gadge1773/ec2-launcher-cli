@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#“Exit the script immediately if any command fails.”
 set -e
 
 # Color codes
