@@ -1,62 +1,128 @@
-# 🚀 EC2 Launcher – Shell Scripting Project
+# 🚀 EC2 Launcher & ☠️ Terminator CLI
 
-An interactive and user-friendly Bash script to **launch EC2 instances on AWS**.  
-Ideal for DevOps beginners and automation enthusiasts using **shell scripting**.
+A powerful, interactive Bash-based CLI toolkit to **launch** and **terminate** EC2 instances on AWS right from your terminal. Designed to simplify AWS EC2 management for developers and DevOps engineers.
 
-This script simplifies the EC2 creation process with:
+---
 
-✅ Automatic security group creation  
-✅ Subnet detection from default VPC  
-✅ SSH access from your IP  
-✅ Auto SSH login prompt after instance launch  
-✅ Logging, error handling, and color-coded output
+## 📦 Features
+
+### 🚀 EC2 Launcher
+- 🔧 Launch EC2 instances interactively
+- 📍 Automatically detect default VPC & subnet
+- 🔐 Create or use existing security groups
+- 🖥️ Add user-defined instance name tags
+- 🌐 Automatically whitelist your public IP in security group
+
+### ☠️ EC2 Terminator
+- ✅ List all running EC2 instances
+- 🔍 Select instance to terminate interactively
+- 🗑️ Terminate selected EC2 instance safely
 
 ---
 
 ## 📁 Project Structure
+
+```
+ec2-launcher-cli/
+├── ec2-launcher.sh      # Launch new EC2 instances interactively
+├── ec2-terminator.sh    # List and terminate EC2 instances interactively
+└── README.md            # Project documentation
+```
+
 ---
 
-## 🚀 How to Use
+## 🚀 Getting Started
 
-### 1. ✅ Prerequisites
-
-- AWS CLI configured (`aws configure`)
-- A key pair created in EC2 console (e.g., `MyKey`)
-- `jq` and `curl` installed in your environment
-- Proper IAM permissions (EC2, VPC, SG)
-
-### 2. 🖥️ Run the Script
+### 1. Clone the Repository
 
 ```bash
-chmod +x ec2-launcher.sh
+git clone https://github.com/abhi-gadge1773/ec2-launcher-cli.git
+cd ec2-launcher-cli
+```
+
+### 2. Make the Scripts Executable
+
+```bash
+chmod +x ec2-launcher.sh ec2-terminator.sh
+```
+
+---
+
+## ⚙️ Prerequisites
+
+- AWS CLI installed & configured (`aws configure`)
+- IAM user with the following permissions:
+  - `ec2:DescribeInstances`
+  - `ec2:RunInstances`
+  - `ec2:TerminateInstances`
+  - `ec2:CreateSecurityGroup`
+  - `ec2:AuthorizeSecurityGroupIngress`
+
+- Bash Shell (Linux/macOS/Git Bash for Windows)
+
+---
+
+## ▶️ Usage
+
+### Launch EC2 Instance
+
+```bash
 ./ec2-launcher.sh
+```
 
+#### Sample Flow:
+```
+Enter your preferred region: us-east-1
+Enter instance type (default: t2.micro):
+Enter key pair name:
+Enter instance name tag:
+...
 
-shell-scripting/
-├── ec2-launcher.sh # Main script to launch EC2 instances
-├── MyKey.pem # Your local SSH private key (not uploaded to GitHub!)
-├── ec2_creation.log # Auto-generated log of created instances
-└── README.md # This documentation
+🌐 Your public IP: 203.0.113.42
+✔️ EC2 instance launched successfully!
+```
 
-🛠 Features
-Interactive prompts (AMI, instance type, key pair, etc.)
+---
 
-Automatically creates a security group if none is entered
+### Terminate EC2 Instance
 
-Automatically detects subnet from default VPC
+```bash
+./ec2-terminator.sh
+```
 
-Waits for instance to become running
+#### Sample Flow:
+```
+Fetching running EC2 instances...
 
-Displays instance details (Public IP, State, Launch Time)
+[1] i-0123abcd | Name: MyWebApp | State: running
+[2] i-0456efgh | Name: DevServer | State: running
 
-Logs output to ec2_creation.log
+Choose an instance to terminate:
+> 2
 
-Optional: SSH into the instance after creation
+☠️ Terminating i-0456efgh...
+✔️ Instance terminated successfully.
+```
 
-🙋‍♂️ Author
-Abhijeet Gadge
-🔗 LinkedIn
-🐙 GitHub
+---
 
+## 🔐 Safety Notes
 
+- The terminator script **permanently deletes** EC2 instances. Always double-check instance IDs before confirming.
+- Ensure you are using correct AWS region and key pair names while launching.
 
+---
+
+## 👨‍💻 Author
+
+**Abhijeet Gadge**
+
+- 💻 GitHub: [abhi-gadge1773](https://github.com/abhi-gadge1773)
+- 💼 LinkedIn: [Abhijeet Gadge](https://www.linkedin.com/in/abhijeetgadge/)
+- 📧 Email: abhijeetgadge100@gmail.com
+
+---
+
+## 🏷️ License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
