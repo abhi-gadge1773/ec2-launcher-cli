@@ -22,12 +22,12 @@ A powerful, interactive Bash-based CLI toolkit to **launch** and **terminate** E
 
 ## 📁 Project Structure
 
-```
+
 ec2-launcher-cli/
 ├── ec2-launcher.sh      # Launch new EC2 instances interactively
 ├── ec2-terminator.sh    # List and terminate EC2 instances interactively
 └── README.md            # Project documentation
-```
+
 
 ---
 
